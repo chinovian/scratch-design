@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 (November 24, 2026)
+
+- Works without its download script: when `scripts/fetch_handoff.py` isn't there, it downloads and checks a hand-off itself, following the same rules.
+- Adds `claude-directory/`, the copy submitted to Claude's plugin directory, which leaves the script out because the directory only accepts scripts from verified organizations.
+- Adds the Scratch icon.
+
 ## 1.1.0 (November 24, 2026)
 
 - Installs as a Claude plugin from this repository, and with `npx skills add` or `gh skill install` in other agents.

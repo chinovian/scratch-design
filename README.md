@@ -82,13 +82,19 @@ skills/scratch-design/
   references/              deeper guidance on UX, visual design, motion, data visualization, reviewing, and the hand-off format
   scripts/fetch_handoff.py downloads a hand-off and checks every file (Python 3.8+, standard library only)
 .claude-plugin/            lets Claude install this repository as a plugin
+claude-directory/          the copy submitted to Claude's plugin directory: the same skill without scripts/
 ```
 
 ## Releasing a new version
 
 1. Change `metadata.version` in `skills/scratch-design/SKILL.md` and `version` in `.claude-plugin/plugin.json`, and add a line to `CHANGELOG.md`.
-2. Push. Claude users only receive the update when the `plugin.json` version changes.
-3. On chino.nyc, update `scratch/skill/`: put in the new `scratch-design.zip` and `SKILL.md`, and set `version` in `skill.json`. Scratch then tells people when their copy is out of date.
+2. Copy `skills/scratch-design` into `claude-directory/skills/`, leaving out `scripts`, and set the same `version` in `claude-directory/.claude-plugin/plugin.json`.
+3. Push. Claude users only receive the update when the `plugin.json` version changes. For the directory, submit the `claude-directory` folder again.
+4. On chino.nyc, update `scratch/skill/`: put in the new `scratch-design.zip` and `SKILL.md`, and set `version` in `skill.json`. Scratch then tells people when their copy is out of date.
+
+## Claude's plugin directory
+
+The directory only accepts scripts from verified organizations, so the copy submitted there is the `claude-directory` folder: the same skill without `scripts/fetch_handoff.py`. Without the script, the skill downloads and checks hand-offs itself, following the same rules. Installs from this repository, `npx skills` and the zip keep the script.
 
 ## License
 
