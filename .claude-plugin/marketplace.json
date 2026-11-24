@@ -1,0 +1,16 @@
+{
+  "name": "scratch-skills",
+  "description": "Skills for Scratch, the board for collecting references and sketching flows at chino.nyc/scratch.",
+  "owner": {
+    "name": "chinovian",
+    "url": "https://chino.nyc/scratch/skill/"
+  },
+  "plugins": [
+    {
+      "name": "scratch-design",
+      "source": "./",
+      "description": "Turns a Scratch hand-off (frames, flows, sketches and reference images) into a prototype, page, motion piece, chart or design review, then reviews and fixes its own work.",
+      "category": "design"
+    }
+  ]
+}
