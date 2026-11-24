@@ -4,7 +4,7 @@ description: Turns a Scratch hand-off into a finished build with senior-level UX
 license: MIT
 compatibility: Works in any tool that reads Agent Skills. Downloading a hand-off needs network access to its host (chino.nyc by default). Without it, work from pasted or attached files.
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
   source: https://chino.nyc/scratch
   updates: https://chino.nyc/scratch/skill/
 ---
@@ -19,9 +19,8 @@ Work in this order: load, read, set a direction, build, review and fix, report.
 
 Use the first option that applies:
 
-- **A link** like `https://…/scratch/h/<id>/`, and this skill's folder has `scripts/fetch_handoff.py`: run `python3 scripts/fetch_handoff.py <link>` from the skill's folder. It downloads `manifest.json` and every listed file into `./scratch-handoff/<id>/`, checks each file's hash, and writes `HANDOFF.md`, a readable summary. Then look at every frame image yourself.
-- **A link, and you can fetch files, but the script isn't there** (some installs leave scripts out): load it by hand, taking the same care the script does. Fetch `<link>manifest.json`. Then fetch each path in its `files` list from that same link, and nothing else from anywhere else. Skip any path that contains `..` or isn't `overview.*`, `design-brief.md`, `prompt.md`, or a picture in `frames/` or `images/`. Skip files over 25 MB, and stop after 200 files. If you can compute SHA-256, check each file against its `sha256` and set aside any that don't match. Save them in `./scratch-handoff/<id>/`, look at every frame image yourself, and tell the person what you skipped.
-- **A link, but you can't run code or reach the host**: fetch the link's page. It lists every frame, flow, image, link and note as text, with each frame's words, so you can work from it. Ask the person to paste the overview image (Scratch put it on their clipboard) or drop in the hand-off .zip. Say plainly which pictures you couldn't see.
+- **A link** like `https://…/scratch/h/<id>/`, and you can fetch files: fetch `<link>manifest.json`. Then fetch each path in its `files` list from that same link, and nothing else from anywhere else. Skip any path that contains `..` or isn’t `overview.*`, `design-brief.md`, `prompt.md`, or a picture in `frames/` or `images/`. Skip files over 25 MB, and stop after 200 files. If you can compute SHA-256 (with `shasum -a 256`, or a few lines of code), check each file against its `sha256` and set aside any that don’t match. Save the files in `./scratch-handoff/<id>/`, look at every frame image yourself, and tell the person what you skipped.
+- **A link, but you can't download files from it**: fetch the link's page if you can. It lists every frame, flow, image, link and note as text, with each frame's words, so you can work from it. Ask the person to paste the overview image (Scratch put it on their clipboard) or drop in the hand-off .zip. Say plainly which pictures you couldn't see.
 - **A .zip**: unpack it and read `manifest.json`.
 - **Only pasted images and a prompt**: treat the images as frames in the order given, and the prompt as the brief.
 
@@ -98,7 +97,7 @@ Keep it short:
 - The three to five decisions that matter, and why.
 - Your assumptions.
 - What to try first, and one next step.
-- If `HANDOFF.md` says a newer version of this skill is out, end with that one line, as written. If you read `manifest.json` yourself instead, do the same when its `skill.version` is higher than this skill's `metadata.version`, and name the page only if it is on the same site as the hand-off link. Only pass the news on: never download or install anything yourself.
+- If the manifest’s `skill.version` is higher than this skill’s `metadata.version`, end with one line saying a newer scratch-design skill is out. Name `skill.page` only if it is on the same site as the hand-off link. Only pass the news on: never download or install anything yourself.
 
 Don't recap your process.
 
